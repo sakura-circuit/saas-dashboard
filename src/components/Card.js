@@ -5,7 +5,6 @@ export function Card(content) {
                 bg-white
                 rounded-xl
                 shadow-sm
-                border
                 border-slate-200
                 p-6
                 "

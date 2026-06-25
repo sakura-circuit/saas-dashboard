@@ -1,32 +1,62 @@
-import { Button } from "../components/Button.js";
-import { Card } from "../components/Card.js";
-import { Container } from "../components/Container.js";
+import { Card } from "../components/Card";
+import { DashboardLayout } from "../layouts/DashboardLayout";
 
 export function DashboardPage() {
-  return `
-        <main class="min-h-screen bg-slate-100 py-8">
-            
-            ${Container(`
-                <div class="space-y-6">
+  return DashboardLayout(`
+        <h1 class="text-4xl font-bold mb-8">
+            Dashboard
+        </h1>
 
-                    <h1 class="text-4x1 font-bold>
-                        SaaS Dashboard
-                    </h1>
+        <div
+            class="
+                grid
+                grid-cols-1
+                md:grid-cols-2
+                xl:grid-cols-4
+                gap-6
+            "
+        >
 
-                    ${Card(`
-                        <h2 class="tet-xl font-semibold mb-4">
-                            Welcome
-                        </h2>
-                    
+            ${Card(`
+                <p class="text-slate-500">
+                    Revenue
+                </p>
 
-                    ${Button({
-                      label: "Get Started",
-                    })}
-                    `)}
-                </div>
-
+                <h2 class="text-3xl font-bold mt-2">
+                    $45,000
+                </h2>
                 `)}
 
-        </main>
-    `;
+            ${Card(`
+                <p class="text-slate-500">
+                    Users
+                </p>
+
+                <h2 class="text-3xl font-bold mt-2">
+                    12,400
+                </h2>
+                `)}
+
+            ${Card(`
+                <p class="text-slate-500">
+                    Orders
+                </p>
+
+                <h2 class="text-3xl font-bold mt-2">
+                    840
+                </h2>
+                `)}
+
+            ${Card(`
+                <p class="text-slate-500">
+                    Growth
+                </p>
+
+                <h2 class="text-3xl font-bold mt-2">
+                    24%
+                </h2>
+                `)}
+
+        </div>
+    `);
 }

@@ -13,6 +13,7 @@ export function Button({ label, variant = "primary" }) {
                 rounded-lg
                 font-medium
                 transition
+                cursor-pointer
                 ${variants[variant]}
                 "
             >
