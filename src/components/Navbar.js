@@ -1,3 +1,5 @@
+import { uiStore } from "../store/uiStore";
+
 export function Navbar() {
   return `
         <header
@@ -20,11 +22,17 @@ export function Navbar() {
                 </h1>
 
                 <button
+                    id="menu-toggle"
                     aria-label="Open menu"
+                    aria-expanded="${uiStore.mobileMenuOpen}"
                     class="
                         p-2
                         rounded-lg
                         hover:bg-slate-100
+                        focus:outline-none
+                        focus:ring-2
+                        focus:ring-blue-500
+                        cursor-pointer
                     "
                 >
                     ☰

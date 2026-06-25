@@ -1,4 +1,4 @@
 import "./styles/main.css";
-import { DashboardPage } from "./pages/DashboardPage.js";
+import { renderApp } from "./app";
 
-document.querySelector("#app").innerHTML = DashboardPage();
+renderApp();
