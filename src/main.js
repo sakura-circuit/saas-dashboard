@@ -1,7 +1,4 @@
-import "./style.css";
+import "./styles/main.css";
+import { DashboardPage } from "./pages/DashboardPage.js";
 
-document.querySelector("#app").innerHTML = `
-  <h1 class="text-4xl font-bold text-blue-600">
-    SaaS Dashboard
-  </h1>
-`;
+document.querySelector("#app").innerHTML = DashboardPage();
