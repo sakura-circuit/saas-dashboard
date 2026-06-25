@@ -22,4 +22,18 @@ export function registerEvents() {
       renderApp();
     });
   });
+
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      uiStore.currentPage = event.target.dataset.page;
+
+      uiStore.mobileMenuOpen = false;
+
+      renderApp();
+    });
+  });
 }

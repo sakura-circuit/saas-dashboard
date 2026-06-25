@@ -1,13 +1,22 @@
 import { navigation } from "../data/navigation";
+import { uiStore } from "../store/uiStore";
 
 export function MobileMenu() {
   const links = navigation
-    .map(
-      (item) => `
+    .map((item) => {
+      const activeClass =
+        uiStore.currentPage === item.page
+          ? "bg-slate-200 dark:bg-slate-700"
+          : "";
+      return `
             <li>
                 <a
-                    href="${item.href}"
+                    href="#"
+                    data-page="${item.page}"
                     class="
+                        nav-link
+                        ${activeClass}
+
                         block
                         px-4
                         py-3
@@ -20,8 +29,8 @@ export function MobileMenu() {
                     ${item.label}
                 </a>
             </li>            
-        `,
-    )
+        `;
+    })
     .join("");
 
   return `
@@ -30,8 +39,8 @@ export function MobileMenu() {
             class="
                 lg:hidden
                 bg-white
-                border-b
-                border-slate-200
+                dark:bg-slate-800
+                
 
                 slide-down
             "

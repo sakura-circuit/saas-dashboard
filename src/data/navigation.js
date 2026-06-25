@@ -1,14 +1,14 @@
 export const navigation = [
   {
     label: "Dashboard",
-    href: "#dashboard",
+    page: "dashboard",
   },
   {
     label: "Users",
-    href: "#users",
+    page: "users",
   },
   {
     label: "Reports",
-    href: "#reports",
+    page: "reports",
   },
 ];

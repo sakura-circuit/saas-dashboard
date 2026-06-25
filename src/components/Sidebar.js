@@ -1,14 +1,23 @@
 import { navigation } from "../data/navigation";
+import { uiStore } from "../store/uiStore";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Sidebar() {
   const links = navigation
-    .map(
-      (item) => `
+    .map((item) => {
+      const activeClass =
+        uiStore.currentPage === item.page
+          ? "bg-slate-200 dark:bg-slate-700"
+          : "";
+      return `
             <li>
                 <a
-                    href="${item.href}"
+                    href="#"
+                    data-page="${item.page}"
                     class="
+                        nav-link
+                        ${activeClass}
+
                         block
                         px-4
                         py-2
@@ -25,8 +34,8 @@ export function Sidebar() {
                     ${item.label}
                 </a>
             </li>
-        `,
-    )
+        `;
+    })
     .join("");
 
   return `

@@ -26,8 +26,6 @@ export function applyTheme() {
 export function toggleTheme() {
   themeStore.theme = themeStore.theme === "light" ? "dark" : "light";
 
-  console.log("themeStore.theme", themeStore.theme);
-
   localStorage.setItem("theme", themeStore.theme);
 
   applyTheme();

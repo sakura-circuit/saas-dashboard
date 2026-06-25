@@ -10,8 +10,7 @@ export function Navbar() {
                 bg-white
                 dark:bg-slate-800
                 
-                border-b
-                border-slate-200
+               
 
                 px-4
                 py-4
@@ -35,7 +34,10 @@ export function Navbar() {
                         class="
                             p-2
                             rounded-lg
+                            
                             hover:bg-slate-100
+                            dark:hover:bg-slate-700
+
                             focus:outline-none
                             focus:ring-2
                             focus:ring-blue-500
