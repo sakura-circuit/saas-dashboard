@@ -5,7 +5,10 @@ import { uiStore } from "../store/uiStore.js";
 
 export function DashboardLayout(content) {
   return `
-        <div class="min-h-screen bg-slate-100">
+        <div class="
+            min-h-screen
+            bg-slate-100
+            dark:bg-slate-900">
 
             ${Navbar()}
 

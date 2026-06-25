@@ -12,7 +12,9 @@ export function MobileMenu() {
                         px-4
                         py-3
                         rounded-lg
+                        
                         hover:bg-slate-100
+                        dark:hover:bg-slate-700
                     "
                 >
                     ${item.label}

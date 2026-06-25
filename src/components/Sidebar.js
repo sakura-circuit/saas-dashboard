@@ -1,4 +1,5 @@
 import { navigation } from "../data/navigation";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Sidebar() {
   const links = navigation
@@ -14,6 +15,7 @@ export function Sidebar() {
                         rounded-lg
 
                         hover:bg-slate-100
+                        dark:hover:bg-slate-700
 
                         focus:outline-none
                         focus:ring-2
@@ -38,15 +40,28 @@ export function Sidebar() {
                 flex-col
 
                 bg-white
+                dark:bg-slate-800
+
                 border-r
                 border-slate-200
+                dark:border-slate-700
             "
         >
 
-            <div class="p-6 border-b border-slate-200">
+            <div class="
+                    p-6
+                    border-b
+                    border-slate-200
+                    dark:border-slate-700
+
+                    flex
+                    items-center
+                    justify-between">
                 <h2 class="text-xl font-bold">
                     SaaS Dashboard
                 </h2>
+
+                 ${ThemeToggle()}
             </div>
 
             <nav aria-label="Main navigation" class="p-4">
