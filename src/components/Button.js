@@ -1,4 +1,4 @@
-export function Button({ label, variant = "primary" }) {
+export function Button({ label, variant = "primary", type = "button" }) {
   const variants = {
     primary: "bg-blue-600 text-white hover:bg-blue-700",
 

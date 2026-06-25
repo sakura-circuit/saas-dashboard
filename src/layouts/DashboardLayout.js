@@ -11,7 +11,7 @@ export function DashboardLayout(content) {
 
                 ${Sidebar()}
 
-                <main class="flex-1 p-6">
+                <main id="main-content" class="flex-1 p-6">
                     ${content}
                 </main>
             </div>

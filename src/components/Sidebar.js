@@ -1,4 +1,32 @@
+import { navigation } from "../data/navigation";
+
 export function Sidebar() {
+  const links = navigation
+    .map(
+      (item) => `
+            <li>
+                <a
+                    href="${item.href}"
+                    class="
+                        block
+                        px-4
+                        py-2
+                        rounded-lg
+
+                        hover:bg-slate-100
+
+                        focus:outline-none
+                        focus:ring-2
+                      focus:ring-blue-200
+                    "
+                >
+                    ${item.label}
+                </a>
+            </li>
+        `,
+    )
+    .join("");
+
   return `
         <aside
             class="
@@ -21,54 +49,10 @@ export function Sidebar() {
                 </h2>
             </div>
 
-            <nav class="p-4">
+            <nav aria-label="Main navigation" class="p-4">
                 <ul class="space-y-2">
 
-                    <li>
-                        <a
-                            href="#"
-                            class="
-                                block
-                                px-4
-                                py-2
-                                rounded-lg
-                                hover:bg-slate-100
-                            "
-                        >
-                            Dashboard
-                        </a>
-                    </li>
-
-                    <li>
-                        <a
-                            href="#"
-                            class="
-                                block
-                                px-4
-                                py-2
-                                rounded-lg
-                                hover:bg-slate-100
-                            "
-                        >
-                            Users
-                        </a>
-                    </li>
-
-                    <li>
-                        <a
-                            href="#"
-                            class="
-                                block
-                                px-4
-                                py-2
-                                rounded-lg
-                                hover:bg-slate-100
-
-                            "
-                        >
-                            Reports
-                        </a>
-                    </li>
+                    ${links}
 
                 </ul>
             </nav>
