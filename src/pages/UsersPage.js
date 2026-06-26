@@ -9,51 +9,35 @@ import { EmptyState } from "../components/EmptyState.js";
 
 import { Pagination } from "../components/Pagination.js";
 
+import {
+    filterUsers,
+    sortUsers,
+    paginateUsers,
+    getTotalPages,
+} from "../services/userService.js";
+
 export function UsersPage() {
-  const filteredUsers = users.filter((user) => {
-    const query = uiStore.userSearch.trim().toLowerCase();
+    const filteredUsers = filterUsers(users, uiStore.userSearch);
 
-    if (!query) {
-      return true;
-    }
-
-    return (
-      user.name.toLowerCase().includes(query) ||
-      user.email.toLowerCase().includes(query) ||
-      String(user.id) === query
+    const sortedUsers = sortUsers(
+        filteredUsers,
+        uiStore.userSortField,
+        uiStore.userSortDirection,
     );
-  });
 
-  const sortedUsers = [...filteredUsers];
+    const paginatedUsers = paginateUsers(
+        sortedUsers,
+        uiStore.currentUserPage,
+        uiStore.usersPerPage,
+    );
 
-  sortedUsers.sort((a, b) => {
-    const field = uiStore.userSortField;
-    const direction = uiStore.userSortDirection;
+    const rows = paginatedUsers.map((user) => [user.id, user.name, user.email]);
 
-    if (a[field] < b[field]) {
-      return direction === "asc" ? -1 : 1;
-    }
+    const totalPages = getTotalPages(sortedUsers.length, uiStore.usersPerPage);
 
-    if (a[field] > b[field]) {
-      return direction === "asc" ? 1 : -1;
-    }
+    uiStore.totalUserPages = totalPages;
 
-    return 0;
-  });
-
-  const startIndex = (uiStore.currentUserPage - 1) * uiStore.usersPerPage;
-
-  const endIndex = startIndex + uiStore.usersPerPage;
-
-  const paginatedUsers = sortedUsers.slice(startIndex, endIndex);
-
-  const rows = paginatedUsers.map((user) => [user.id, user.name, user.email]);
-
-  const totalPages = Math.ceil(sortedUsers.length / uiStore.usersPerPage);
-
-  uiStore.totalUserPages = totalPages;
-
-  return DashboardLayout(`
+    return DashboardLayout(`
     <div class="space-y-6">
 
         <h1 class="text-4xl font-bold">
@@ -61,9 +45,9 @@ export function UsersPage() {
         </h1>
 
         ${Input({
-          id: "user-search",
-          placeholder: "Search users...",
-          value: uiStore.userSearch,
+            id: "user-search",
+            placeholder: "Search users...",
+            value: uiStore.userSearch,
         })}
 
         <p
@@ -77,34 +61,34 @@ export function UsersPage() {
         </p>
 
         ${
-          rows.length
-            ? `${Table({
-                headers: [
-                  {
-                    label: "ID",
-                    field: "id",
-                  },
-                  {
-                    label: "Name",
-                    field: "name",
-                  },
-                  {
-                    label: "Email",
-                    field: "email",
-                  },
-                ],
-                rows,
-              })}
+            rows.length
+                ? `${Table({
+                      headers: [
+                          {
+                              label: "ID",
+                              field: "id",
+                          },
+                          {
+                              label: "Name",
+                              field: "name",
+                          },
+                          {
+                              label: "Email",
+                              field: "email",
+                          },
+                      ],
+                      rows,
+                  })}
 
               ${Pagination({
-                currentPage: uiStore.currentUserPage,
-                totalPages,
+                  currentPage: uiStore.currentUserPage,
+                  totalPages,
               })}
                 `
-            : EmptyState({
-                title: "No users found",
-                description: "Try adjusting your search criteria.",
-              })
+                : EmptyState({
+                      title: "No users found",
+                      description: "Try adjusting your search criteria.",
+                  })
         }
     </div>
   `);
