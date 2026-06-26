@@ -3,6 +3,8 @@ import { renderApp } from "../app";
 
 import { toggleTheme } from "../utils/theme";
 
+import { debounce } from "../utils/debounce";
+
 export function registerEvents() {
   const menuButton = document.querySelector("#menu-toggle");
 
@@ -37,24 +39,23 @@ export function registerEvents() {
     });
   });
 
+  const handleSearch = debounce((value) => {
+    uiStore.userSearch = value;
+
+    renderApp();
+
+    const newSearchInput = document.querySelector("#user-search");
+
+    if (newSearchInput) {
+      newSearchInput.focus();
+
+      newSearchInput.setSelectionRange(value.length, value.length);
+    }
+  }, 300);
+
   const searchInput = document.querySelector("#user-search");
-
-  if (searchInput) {
+  if (searchInput)
     searchInput.addEventListener("input", (event) => {
-      uiStore.userSearch = event.target.value;
-
-      renderApp();
-
-      const newSearchInput = document.querySelector("#user-search");
-
-      if (newSearchInput) {
-        newSearchInput.focus();
-
-        newSearchInput.setSelectionRange(
-          uiStore.userSearch.length,
-          uiStore.userSearch.length,
-        );
-      }
+      handleSearch(event.target.value);
     });
-  }
 }
