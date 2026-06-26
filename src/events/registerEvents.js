@@ -36,4 +36,25 @@ export function registerEvents() {
       renderApp();
     });
   });
+
+  const searchInput = document.querySelector("#user-search");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (event) => {
+      uiStore.userSearch = event.target.value;
+
+      renderApp();
+
+      const newSearchInput = document.querySelector("#user-search");
+
+      if (newSearchInput) {
+        newSearchInput.focus();
+
+        newSearchInput.setSelectionRange(
+          uiStore.userSearch.length,
+          uiStore.userSearch.length,
+        );
+      }
+    });
+  }
 }
