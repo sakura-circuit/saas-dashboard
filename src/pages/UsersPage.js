@@ -5,6 +5,8 @@ import { uiStore } from "../store/uiStore.js";
 
 import { DashboardLayout } from "../layouts/DashboardLayout.js";
 
+import { EmptyState } from "../components/EmptyState.js";
+
 export function UsersPage() {
   const filteredUsers = users.filter((user) => {
     const query = uiStore.userSearch.trim().toLowerCase();
@@ -20,7 +22,24 @@ export function UsersPage() {
     );
   });
 
-  const rows = filteredUsers.map((user) => [user.id, user.name, user.email]);
+  const sortedUsers = [...filteredUsers];
+
+  sortedUsers.sort((a, b) => {
+    const field = uiStore.userSortField;
+    const direction = uiStore.userSortDirection;
+
+    if (a[field] < b[field]) {
+      return direction === "asc" ? -1 : 1;
+    }
+
+    if (a[field] > b[field]) {
+      return direction === "asc" ? 1 : -1;
+    }
+
+    return 0;
+  });
+
+  const rows = sortedUsers.map((user) => [user.id, user.name, user.email]);
 
   return DashboardLayout(`
     <div class="space-y-6">
@@ -35,10 +54,27 @@ export function UsersPage() {
           value: uiStore.userSearch,
         })}
 
-        ${Table({
-          headers: ["ID", "Name", "Email"],
-          rows,
-        })}
+        <p
+          class="
+            text-sm
+            text-slate-500
+          "
+        >
+          ${filteredUsers.length}
+          users found
+        </p>
+
+        ${
+          rows.length
+            ? Table({
+                headers: ["ID", "Name", "Email"],
+                rows,
+              })
+            : EmptyState({
+                title: "No users found",
+                description: "Try adjusting your search criteria.",
+              })
+        }
     </div>
   `);
 }
