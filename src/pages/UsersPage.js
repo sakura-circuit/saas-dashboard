@@ -67,7 +67,20 @@ export function UsersPage() {
         ${
           rows.length
             ? Table({
-                headers: ["ID", "Name", "Email"],
+                headers: [
+                  {
+                    label: "ID",
+                    field: "id",
+                  },
+                  {
+                    label: "Name",
+                    field: "name",
+                  },
+                  {
+                    label: "Email",
+                    field: "email",
+                  },
+                ],
                 rows,
               })
             : EmptyState({

@@ -58,4 +58,22 @@ export function registerEvents() {
     searchInput.addEventListener("input", (event) => {
       handleSearch(event.target.value);
     });
+
+  const sortButtons = document.querySelectorAll(".sort-button");
+
+  sortButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const field = button.dataset.sortField;
+
+      if (uiStore.userSortField === field) {
+        uiStore.userSortDirection =
+          uiStore.userSortDirection === "asc" ? "desc" : "asc";
+      } else {
+        uiStore.userSortField = field;
+        uiStore.userSortDirection = "asc";
+      }
+
+      renderApp();
+    });
+  });
 }

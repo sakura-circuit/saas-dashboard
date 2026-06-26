@@ -1,7 +1,14 @@
+import { uiStore } from "../store/uiStore";
+
 export function Table({ headers, rows }) {
   const headerMarkup = headers
-    .map(
-      (header) => `
+    .map((header) => {
+      let indicator = "";
+
+      if (uiStore.userSortField === header.field) {
+        indicator = uiStore.userSortDirection === "asc" ? "↑" : "↓";
+      }
+      return `
             <th
                 class="
                     text-left
@@ -12,10 +19,26 @@ export function Table({ headers, rows }) {
                     dark:border-slate-700
                 "
             >
-                ${header}
+                <button
+                    data-sort-field="${header.field}"
+                    class="
+                        sort-button
+
+                        flex
+                        items-center
+                        gap-2
+
+                        font-semibold
+
+                        hover:text-blue-500
+                    "
+                >
+                    ${header.label}
+                    ${indicator}
+                </button>
             </th>
-        `,
-    )
+        `;
+    })
     .join("");
 
   const rowMarkup = rows
