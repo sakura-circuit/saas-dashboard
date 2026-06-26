@@ -16,21 +16,15 @@ https://your-demo-url.com
 
 ### Dashboard (Light Theme)
 
-Add screenshot:
-
-docs/dashboard-light.png
+![Demo](docs/dashboard-light.png)
 
 ### Dashboard (Dark Theme)
 
-Add screenshot:
-
-docs/dashboard-dark.png
+![Demo](docs/dashboard-dark.png)
 
 ### Mobile View
 
-Add screenshot:
-
-docs/mobile-view.png
+![Demo](docs/mobile-view.png)
 
 ---
 
