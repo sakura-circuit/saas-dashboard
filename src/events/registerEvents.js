@@ -42,6 +42,8 @@ export function registerEvents() {
   const handleSearch = debounce((value) => {
     uiStore.userSearch = value;
 
+    uiStore.currentUserPage = 1;
+
     renderApp();
 
     const newSearchInput = document.querySelector("#user-search");
@@ -76,4 +78,28 @@ export function registerEvents() {
       renderApp();
     });
   });
+
+  const prevPage = document.querySelector("#prev-page");
+
+  if (prevPage) {
+    prevPage.addEventListener("click", () => {
+      if (uiStore.currentUserPage > 1) {
+        uiStore.currentUserPage--;
+
+        renderApp();
+      }
+    });
+  }
+
+  const nextPage = document.querySelector("#next-page");
+
+  if (nextPage) {
+    nextPage.addEventListener("click", () => {
+      if (uiStore.currentUserPage < uiStore.totalUserPages) {
+        uiStore.currentUserPage++;
+
+        renderApp();
+      }
+    });
+  }
 }

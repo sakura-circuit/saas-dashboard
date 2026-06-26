@@ -7,6 +7,8 @@ import { DashboardLayout } from "../layouts/DashboardLayout.js";
 
 import { EmptyState } from "../components/EmptyState.js";
 
+import { Pagination } from "../components/Pagination.js";
+
 export function UsersPage() {
   const filteredUsers = users.filter((user) => {
     const query = uiStore.userSearch.trim().toLowerCase();
@@ -39,7 +41,17 @@ export function UsersPage() {
     return 0;
   });
 
-  const rows = sortedUsers.map((user) => [user.id, user.name, user.email]);
+  const startIndex = (uiStore.currentUserPage - 1) * uiStore.usersPerPage;
+
+  const endIndex = startIndex + uiStore.usersPerPage;
+
+  const paginatedUsers = sortedUsers.slice(startIndex, endIndex);
+
+  const rows = paginatedUsers.map((user) => [user.id, user.name, user.email]);
+
+  const totalPages = Math.ceil(sortedUsers.length / uiStore.usersPerPage);
+
+  uiStore.totalUserPages = totalPages;
 
   return DashboardLayout(`
     <div class="space-y-6">
@@ -66,7 +78,7 @@ export function UsersPage() {
 
         ${
           rows.length
-            ? Table({
+            ? `${Table({
                 headers: [
                   {
                     label: "ID",
@@ -82,7 +94,13 @@ export function UsersPage() {
                   },
                 ],
                 rows,
-              })
+              })}
+
+              ${Pagination({
+                currentPage: uiStore.currentUserPage,
+                totalPages,
+              })}
+                `
             : EmptyState({
                 title: "No users found",
                 description: "Try adjusting your search criteria.",

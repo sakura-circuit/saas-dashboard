@@ -1,27 +1,7 @@
-export const users = [
-  {
-    id: 1,
-    name: "John Smith",
-    email: "john@example.com",
-  },
-  {
-    id: 2,
-    name: "Sarah Johnson",
-    email: "sarah@example.com",
-  },
-  {
-    id: 3,
-    name: "Mike Brown",
-    email: "mike@example.com",
-  },
-  {
-    id: 4,
-    name: "Emma Wilson",
-    email: "emma@example.com",
-  },
-  {
-    id: 5,
-    name: "Alex Davis",
-    email: "alex@example.com",
-  },
-];
+export const users = Array.from({ length: 100 }, (_, index) => ({
+  id: index + 1,
+
+  name: `User ${index + 1}`,
+
+  email: `user${index + 1}@example.com`,
+}));
